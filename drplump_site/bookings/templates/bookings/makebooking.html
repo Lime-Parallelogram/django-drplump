@@ -1,0 +1,34 @@
+<!--
+File: /home/will22/OneDrive/PiSpace/ByProject/Dr Plump Site/drplump_site/bookings/templates/bookings/makebooking.html
+Project: /home/will22/OneDrive/PiSpace/ByProject/Dr Plump Site/drplump_site/bookings/templates/bookings
+Created Date: Sunday, May 8th 2022, 9:50:19 am
+Description: This page is where you will actually make a booking
+Author: Will Hall
+Copyright (c) 2022 Lime Parallelogram
+-----
+Last Modified: Wed May 18 2022
+Modified By: Will Hall
+-----
+HISTORY:
+Date      	By	Comments
+----------	---	---------------------------------------------------------
+-->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'bookings/css/makebooking.css' %}">
+{% endblock %}
+
+{% block body %}
+<div class="main_content">
+    <h2>Book now: {{service.Name}}</h2>
+    <p>{{service.Description}}</p>
+    <form method="POST" id="frm_booking">
+        {{ form }}
+        <input type="button" id="btn_pay" value="Checkout Now">
+    </form>
+</div>
+{% endblock %}
+
+

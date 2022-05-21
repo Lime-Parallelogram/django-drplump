@@ -1,0 +1,63 @@
+<!--
+File: /home/will22/OneDrive/PiSpace/ByProject/Dr Plump Site/drplump_site/drplump_site/templates/base.html
+Project: /home/will22/OneDrive/PiSpace/ByProject/Dr Plump Site/drplump_site/drplump_site/templates
+Created Date: Sunday, May 1st 2022, 7:18:11 pm
+Description: 
+Author: Will Hall
+Copyright (c) 2022 Lime Parallelogram
+-----
+Last Modified: Fri May 20 2022
+Modified By: Will Hall
+-----
+HISTORY:
+Date      	By	Comments
+----------	---	---------------------------------------------------------
+-->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Almendra+Display&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Ruluko&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="{% static 'css/header.css' %}">
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <title>Dr Plump</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/logo/favicon.png' %}">
+    {% block css %}
+    {% endblock %}
+</head>
+<body>
+    <div class="navbar">
+        <img src="{% static 'img/logo/simple.png' %}">
+        <h1 class="navtitle">drplump.scot</h1>
+        <div class="navcontrols">
+            <a href="/">Home</a>
+            <a href="/book">Book now</a>
+            <a href="/about">About</a>
+        </div>
+    </div>
+    
+    <div class="content">
+        {% block body %}{% endblock %}
+    </div>
+
+
+    <div class="footer">
+        <div class="footer_flex">
+            <div class="col">
+                Dr Fergus Plump - Cosmetic Surgery Service (est. 1997) 
+            </div>
+            <div class="col">
+                Website and Design - Copyright 2022 Lime Parallelogram
+            </div>
+        </div>
+        <p id="disclaimer">* Please note that this site is purely for satire. I do not condone the use of any surgical procedures purely for perceived cosmetic enhancements. Any quotes and information displayed on these pages are fabricated for comedic effect.</p>
+    </div>
+</body>
+</html>

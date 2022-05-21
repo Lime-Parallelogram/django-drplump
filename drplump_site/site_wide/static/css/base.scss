@@ -1,0 +1,48 @@
+/*
+ * File: /home/will22/OneDrive/PiSpace/ByProject/Dr Plump Site/drplump_site/global_static/css/base.scss
+ * Project: /home/will22/OneDrive/PiSpace/ByProject/Dr Plump Site/drplump_site/global_static/css
+ * Created Date: Saturday, May 7th 2022, 9:12:09 pm
+ * Description: CSS Rules that should apply universally across the site.
+ * Author: Will Hall
+ * Copyright (c) 2022 Lime Parallelogram
+ * -----
+ * Last Modified: Sat May 07 2022
+ * Modified By: Will Hall
+ * -----
+ * HISTORY:
+ * Date      	By	Comments
+ * ----------	---	---------------------------------------------------------
+ */
+
+.paragraph
+{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    margin-left: 10px;
+    p
+    {
+        margin-left: 15px;
+        font-size: 20px;
+    }
+}
+
+h2{
+   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+   margin-left: 10px;
+}
+
+.content
+{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-bottom: 50px;
+   
+}
+
+.main_content
+{
+    width: 85%;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+}

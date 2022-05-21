@@ -1,0 +1,95 @@
+/*
+ * File: /home/will22/OneDrive/PiSpace/ByProject/Dr Plump Site/drplump_site/global_static/css/header.scss
+ * Project: /home/will22/OneDrive/PiSpace/ByProject/Dr Plump Site/drplump_site/global_static/css
+ * Created Date: Monday, May 2nd 2022, 11:25:00 am
+ * Description: CSS Information for the header folder on Dr Plump's website
+ * Author: Will Hall
+ * Copyright (c) 2022 Lime Parallelogram
+ * -----
+ * Last Modified: Sat May 07 2022
+ * Modified By: Will Hall
+ * -----
+ * HISTORY:
+ * Date      	By	Comments
+ * ----------	---	---------------------------------------------------------
+ */
+
+ body, html {
+     margin: 0;
+     background-color: #f0f0f0;
+ }
+ 
+ .navbar
+ {
+     background-color: #ffffff;
+     display: flex;
+     height: 36px;
+     padding: 10px;
+     margin: 0;
+     border-bottom: rgb(124, 15, 119) solid 3px;
+ }
+
+ .navtitle
+ {
+    font-family: 'Ruluko', sans-serif;
+    margin-left: 14px;
+    align-self: center;
+    flex-grow: 1;
+ }
+
+ .navbar a
+ {
+     padding: 10px;
+     background-color: #c90ec98a;
+     border-radius: 5px;
+     color: #291724;
+     font-family: 'Ruluko', sans-serif;
+     text-decoration: none;
+     font-size: 18px;
+
+     &:hover
+     {
+         background-color: rgb(255, 106, 210);
+     }
+ }
+
+ .navcontrols
+ {
+     display: flex;
+     align-items: center;
+     gap: 10px;
+ }
+
+ .second_header
+ {
+    background-size: cover;
+    background-position: top;
+     
+     .inner_content
+     {
+         background-color: rgba(255, 255, 255, 0.226);
+         height: 100%;
+         display: flex;
+         justify-content: space-between;
+     }
+
+     .quote
+     {
+         margin-left: 90px;
+         display: flex;
+         flex-direction: column;
+         
+         h1 {
+            font-family: 'Ruluko', sans-serif;
+            color: rgb(26, 23, 23);
+            font-size: 7vh; 
+         }
+         
+     }
+     img
+     {
+         height: 18vh;
+         margin: 40px;
+     }
+     border-bottom: gray solid 1px;
+ }

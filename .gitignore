@@ -1,0 +1,14 @@
+/.vscode
+/Logos.svg
+/dpath17142.png
+/path17142.png
+/puckered-lips-drawing-4.png
+/th.jpg
+
+# Django #
+*.log
+*.pot
+*.pyc
+__pycache__
+db.sqlite3
+media

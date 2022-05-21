@@ -1,0 +1,76 @@
+<!--
+File: /home/will22/OneDrive/PiSpace/ByProject/Dr Plump Site/drplump_site/infosite/templates/infosite/index.html
+Project: /home/will22/OneDrive/PiSpace/ByProject/Dr Plump Site/drplump_site/infosite/templates/infosite
+Created Date: Sunday, May 1st 2022, 7:19:35 pm
+Description: 
+Author: Will Hall
+Copyright (c) 2022 Lime Parallelogram
+-----
+Last Modified: Sun May 08 2022
+Modified By: Will Hall
+-----
+HISTORY:
+Date      	By	Comments
+----------	---	---------------------------------------------------------
+-->
+{% extends "base.html" %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'infosite/css/index.css' %}">
+
+{% endblock %}
+
+{% block body %}
+
+<div class="second_header">
+    <div class="inner_content">
+        <div class="quote">
+            <h1>'Get your lips ready for the big wide world,'</h1>
+            <a id="book_now" href="/book">Book Now!</a>
+        </div>
+        
+        <img src="{% static 'img/logo/full_logo.png' %}">
+    </div> 
+</div>
+<div class="main_content">
+    <div class="paragraph">
+        <h2>Visit our award winning surgery in Edinburgh, UK</h2>
+        <p>Dr Plump and his team of qualified cosmetic surgeons are ready and waiting to offer you their top quality cosmetic modification and beauty treatment services. If you have found yourself suffering from a lack of lip substance or have accumulated too much fat about your midriff you might like to try out our excellent needle-based cosmetic procedures. We can also offer a range of plastic surgery procedures including facial reconstructions and nasal corrections.</p>
+    </div>
+    <h2>Our Services</h2>
+    <table class="our_services">
+        {% for service in services %}
+        <tr class="service">
+            <td class="image"><img src="{{service.ImageURL}}"></td>
+            <td>
+                <h2>{{service.Name}}</h2>
+            <p>{{service.Description}}</p>
+            </td>
+        </tr>
+    {% endfor %}
+    </table>
+    <h2>Image Gallery: </h2>
+    <div class="gallery">
+        <img src="https://www.verywellhealth.com/thmb/kNg0dyyb-MRKM0YAIWnMDQknIK0=/5121x3416/filters:fill(87E3EF,1)/chairs-arranged-in-medical-building-961288374-5c0ac61146e0fb0001e2e5a8.jpg">
+    </div>
+    <h2>Customer Testimonials:</h2>
+    <div class="customer_testimonials">
+        <div class="testimonial">
+            <p>'Is hard to be considered serious in the hard world of politics if your lips aren't up to scratch'</p>
+            <h6>- Nicola Sturgeon</h6>
+            <img src="http://www.deadlinenews.co.uk/wp-content/uploads/2019/08/Nicola-Sturgeon-4.jpg">
+        </div>
+        <div class="testimonial">
+            <p>'Its hard to play the scottish pipes when your lips are too small. Thanks to Dr Plump, I can now wear my kilt with true pride!'</p>
+            <h6>- Alek MacBride</h6>
+            <img src="https://www.publicdomainpictures.net/pictures/200000/velka/scottish-highland-man-1474187141uwI.jpg">
+        </div>
+        <div class="testimonial">
+            <p>'When I was spending time in Scotland, I found my lips feeling deflated, I booked in for a quick refill with Dr Plump and they were fixed in no time. Service was top notch - one of the best clinics I have been to.'</p>
+            <h6>- Kim Kardashian</h6>
+            <img src="https://cdn3.bigcommerce.com/s-9dj7x/product_images/uploaded_images/kim-kardashian-lenses-closeup-met-gala-2018.jpg">
+        </div>
+    </div>
+</div> 
+{% endblock %}

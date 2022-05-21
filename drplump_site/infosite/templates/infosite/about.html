@@ -1,0 +1,46 @@
+<!--
+File: /home/will22/OneDrive/PiSpace/ByProject/Dr Plump Site/drplump_site/infosite/templates/infosite/about.html
+Project: /home/will22/OneDrive/PiSpace/ByProject/Dr Plump Site/drplump_site/infosite/templates/infosite
+Created Date: Saturday, May 7th 2022, 8:51:49 pm
+Description: 
+Author: Will Hall
+Copyright (c) 2022 Lime Parallelogram
+-----
+Last Modified: Sun May 08 2022
+Modified By: Will Hall
+-----
+HISTORY:
+Date      	By	Comments
+----------	---	---------------------------------------------------------
+-->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'infosite/css/about.css' %}">
+{% endblock %}
+
+{% block body %}
+
+<div class="second_header">
+    <div class="inner_content">
+        <div class="quote">
+            <h1>'Dr Plump LTD - est. 1997'</h1>
+            <h4>Scotland's Finest cosmetic surgeon and beauty therapist. </h4>
+        </div>
+        
+    </div>
+</div>
+<div class="main_content">
+    <h2>About:</h2>
+    <div class="paragraph">
+        <img src="{% static 'infosite/img/fergus_plump.jpg' %}" alt="Dr Fergus Plump posing for a photo opportunity">
+        <p>Since 1997, Dr Fergus Plump has been in the business of cosmetic surgery and enhancement. In the last 25 years, Plump has become the most well renowned surgeon in all of Scotland. Plumps celebrity clients have included First Minister Nicola Sturgeon, Kim Kardashian, famous bagpiper Alek MacBride as well as Russian president Vladimir Putin and infamous RE teacher Alison McGore.</p>
+
+        <p>Plump started his surgical training in 1990 and received a Medical degree from Edinburgh University in 1996, opening his cosmetic business one year later in 1997. Plump has been interested in the cosmetic business since he began noticing the lack of lip mass on front page broadsheets, he was sure that going forward his career goal would be to rectify this most remiss fact.</p>
+
+        <p>Should you decide to visit our Surgery, you will be in safe hands, with Plump proudly boasting a 25 year clean record of perfect surgeries: 'that is,' he jokes 'if you discount an incident I had about 6 years ago when a Mr B. Johnson arrived in a huge red bus. He asked for everything we had to prepare him for the campaign trail - his lips were perfect until they deflated all over my white overalls.'</p>
+    </div>
+    
+</div>
+{% endblock %}

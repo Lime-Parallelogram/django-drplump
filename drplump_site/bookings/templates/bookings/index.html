@@ -1,0 +1,40 @@
+<!--
+File: /home/will22/OneDrive/PiSpace/ByProject/Dr Plump Site/drplump_site/bookings/templates/bookings/index.html
+Project: /home/will22/OneDrive/PiSpace/ByProject/Dr Plump Site/drplump_site/bookings/templates/bookings
+Created Date: Saturday, May 7th 2022, 10:07:44 pm
+Description: 
+Author: Will Hall
+Copyright (c) 2022 Lime Parallelogram
+-----
+Last Modified: Sun May 08 2022
+Modified By: Will Hall
+-----
+HISTORY:
+Date      	By	Comments
+----------	---	---------------------------------------------------------
+-->
+{% extends "base.html" %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'bookings/css/index.css' %}">
+{% endblock %}
+
+{% block body %}
+<div class="main_content">
+    <h2> Chose which service you would like to book</h2>
+    <div class="our_services">
+        {% for service in services %}
+        <div class="service" onClick="window.location.href='/book/service?svcid={{service.ID}}'">
+            <div class="image"><img src="{{service.ImageURL}}"></div>
+            <div>
+                <h2>{{service.Name}}</h2>
+                <p>{{service.Description}}</p>
+                <p class="price">From Just £{{service.Price}}!</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

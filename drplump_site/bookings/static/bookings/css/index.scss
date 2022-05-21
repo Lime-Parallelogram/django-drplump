@@ -1,0 +1,56 @@
+/*
+ * File: /home/will22/OneDrive/PiSpace/ByProject/Dr Plump Site/drplump_site/bookings/static/bookings/css/index.scss
+ * Project: /home/will22/OneDrive/PiSpace/ByProject/Dr Plump Site/drplump_site/bookings/static/bookings/css
+ * Created Date: Sunday, May 8th 2022, 8:35:15 am
+ * Description: CSS associated with the main bookings page
+ * Author: Will Hall
+ * Copyright (c) 2022 Lime Parallelogram
+ * -----
+ * Last Modified: Sun May 08 2022
+ * Modified By: Will Hall
+ * -----
+ * HISTORY:
+ * Date      	By	Comments
+ * ----------	---	---------------------------------------------------------
+ */
+
+  .our_services
+  {
+      display: flex;
+      flex-direction: column;
+
+      .service
+      {
+          display: flex;
+          border-top: gray solid 2px;
+          border-bottom: gray solid 2px;
+          padding: 35px 0;
+          transition: 0.3s;
+          cursor: pointer;
+
+          img
+          {
+              height: 10vh;
+          }
+          div 
+          {
+              min-width: 200px;
+          }
+
+          div.image {
+              text-align: center;
+          }
+
+          &:hover
+          {
+              background-color: #df97bb;
+              transform: scaleX(1.04);
+          }
+          .price
+          {
+              font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+              color: rgb(105, 24, 65);
+              font-size: 20px;
+          }
+      }
+  }
