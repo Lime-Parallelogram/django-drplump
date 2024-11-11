@@ -1,0 +1,21 @@
+.our_services
+{
+    display: flex;
+    flex-direction: column;
+
+    /* Custom styles for the services component */
+    .service
+    {
+        border-top: gray solid 2px;
+        border-bottom: gray solid 2px;
+        padding: 35px 0;
+        transition: 0.3s;
+        cursor: pointer;
+
+        &:hover
+        {
+            background-color: #df97bb;
+            transform: scaleX(1.04);
+        }
+    }
+}

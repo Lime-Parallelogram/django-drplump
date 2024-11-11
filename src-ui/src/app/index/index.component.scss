@@ -1,0 +1,79 @@
+.second_header
+{
+   background-image: url("https://www.tripsavvy.com/thmb/LqbhC3zJcMuj9p84XA2oDw3l9n8=/5430x3620/filters:fill(auto,1)/edinburgh-skyline-balmoral-clocktower-scotland-580962115-58cab9ff3df78c3c4fcce9ec.jpg");
+   #book_now
+   {
+       padding: 15px 40px;
+       background-color: rgb(192, 84, 192);
+       border: none;
+       border-radius: 8px;
+       font-family: 'Ruluko', sans-serif;
+       color: rgb(26, 23, 23);
+       transition: 0.4s;
+
+       &:hover{
+           transform: scale(1.4);
+       }
+   }
+}
+
+.gallery
+{
+    
+    display: flex;
+    justify-content: center;
+    img {
+        height: 50vh;
+        border: black solid 3px;
+        margin: 5px;
+    }
+    img::before
+    {
+        content: "<";
+        position: absolute;
+    }
+}
+
+
+
+.customer_testimonials
+{
+    .testimonial
+    {
+       padding: 1rem;
+
+        img{
+           border-radius: 15px 50% 30px;
+           object-fit: cover;
+           width: 60%;
+           align-self: flex-end;
+           aspect-ratio: 1/1;
+           margin-top: auto;
+        }
+        
+    }
+}
+
+.carousel-item img{
+   object-fit: cover;
+  aspect-ratio: 16/9;
+  box-shadow: rgb(204, 204, 204) 16px 8px 8px;
+}
+
+app-services
+{
+    .service
+    {
+        td.image {
+            min-width: 200px;
+            text-align: center;
+        }
+        
+    }
+    .img_service{
+        height: 10vh;
+        padding: 15px;
+    }
+
+}
+

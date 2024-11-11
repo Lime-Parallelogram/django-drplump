@@ -1,11 +1,7 @@
-/.vscode
-/Logos.svg
-/dpath17142.png
-/path17142.png
-/puckered-lips-drawing-4.png
-/th.jpg
+.vscode
 
 # Django #
+venv
 *.log
 *.pot
 *.pyc

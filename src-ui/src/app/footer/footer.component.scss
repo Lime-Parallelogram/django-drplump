@@ -1,0 +1,25 @@
+ footer
+ {
+     display: flex;
+     flex-direction: column;
+     
+     .footer_flex{
+         display: flex;
+     }
+     
+     background-color: rgb(37, 37, 37);
+     min-height: 100px;
+     color: white;
+     font-family: sans-serif;
+     .col
+     {
+         padding: 15px;
+         margin: 10px;
+     }
+     #disclaimer
+     {
+         margin-top: auto;
+         padding-left: 14px;
+         font-size: 11px;
+     }
+ }

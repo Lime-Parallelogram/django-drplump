@@ -1,0 +1,28 @@
+.service
+{
+    display: flex;
+
+    img
+    {
+        height: 10vh;
+    }
+    div 
+    {
+        min-width: 200px;
+    }
+
+    div.image {
+        text-align: center;
+    }
+    .price
+    {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: rgb(105, 24, 65);
+        font-size: 20px;
+    }
+}
+
+
+
+
+    
