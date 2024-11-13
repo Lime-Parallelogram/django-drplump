@@ -1,7 +1,12 @@
-<h2>Our Services</h2>
 <div class="container">
-    <div class="service row" *ngFor="let service of services" (click)="chooseService(service.ID)">
-        <div class="col-md-2 text-center"><img class="img-fluid img_service" src="{{service.ImageURL}}"></div>
+    <div class="service row" *ngFor="let service of services" (click)="chooseService(service)">
+
+        <!-- Selection box if selectable -->
+         <div *ngIf="selectable" class="selection_checkbox" [class.selected]="service == selected_service">
+            
+         </div>
+
+        <div class="col-md-2 text-center"><img class="img-fluid img_service" src="{{service.ImageURL}}" ></div>
         <div class="col-md">
             <h2>{{service.Name}}</h2>
         <p>{{service.Description}}</p>

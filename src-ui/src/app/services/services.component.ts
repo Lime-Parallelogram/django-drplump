@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { retry, catchError } from 'rxjs/operators';
@@ -26,6 +26,9 @@ export class ServicesComponent implements OnInit {
   };
   services: any;
 
+  @Input() selectable = false;
+  @Output() selected_service?: Service;
+
   constructor(private http: HttpClient) { }
 
   getServices() {
@@ -34,8 +37,8 @@ export class ServicesComponent implements OnInit {
     console.log("Services", this.services)
   }
 
-  chooseService(serviceID: number) {
-    console.log(serviceID)
+  chooseService(service: Service) {
+    this.selected_service = service;
   }
 
   handleError(error: HttpErrorResponse) {

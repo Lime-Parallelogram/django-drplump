@@ -1,24 +1,38 @@
 .service
 {
     display: flex;
+    margin: 1rem;
+    cursor: pointer;
+    
+    .selection_checkbox {
+        max-width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        align-self: center;
+
+        background-color: #dadada;
+        border: #dadada 5px solid;
+
+        &.selected {
+            background-color: rgb(211, 82, 82);
+        }
+    }
+    
 
     img
     {
         height: 10vh;
     }
-    div 
-    {
-        min-width: 200px;
-    }
-
-    div.image {
-        text-align: center;
-    }
+    
     .price
     {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         color: rgb(105, 24, 65);
         font-size: 20px;
+    }
+
+    &.selected {
+        background-color: red;
     }
 }
 
