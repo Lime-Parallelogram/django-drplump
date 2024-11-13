@@ -3,27 +3,25 @@ import { RouterModule, Routes } from '@angular/router'
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { ServicesComponent } from './services/services.component';
+import { OurServicesWidgetComponent } from './global/widgets/our-services-widget/our-services-widget.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NavbarComponent } from './navbar/navbar.component';
-import { FooterComponent } from './footer/footer.component';
-import { AboutComponent } from './about/about.component';
-import { IndexComponent } from './index/index.component';
-import { BookingComponent } from './booking/booking.component';
-import { MakebookingComponent } from './makebooking/makebooking.component';
+import { NavbarComponent } from './global/navbar/navbar.component';
+import { FooterComponent } from './global/footer/footer.component';
+import { AboutComponent } from './pages/about/about.component';
+import { IndexComponent } from './pages/index/index.component';
+import { BookingComponent } from './pages/booking/booking.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ServiceChoiceComponent } from './booking/service-choice/service-choice.component';
+import { ServiceChoiceComponent } from './pages/booking/service-choice/service-choice.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ServicesComponent,
+    OurServicesWidgetComponent,
     NavbarComponent,
     FooterComponent,
     AboutComponent,
     IndexComponent,
     BookingComponent,
-    MakebookingComponent,
     ServiceChoiceComponent
   ],
   imports: [
