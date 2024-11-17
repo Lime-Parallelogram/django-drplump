@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { BookingService } from 'src/app/services/booking.service';
+import { Service } from 'src/app/services/our-services.service';
 
 @Component({
   selector: 'app-service-choice',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ServiceChoiceComponent implements OnInit {
 
-  constructor() { }
+  constructor(private bookingService: BookingService) { }
+
+  selectedService?: Service;
 
   ngOnInit(): void {
+  }
+
+  updateSummary(selectedService: Service) {
+    this.selectedService = selectedService;
+    this.bookingService.selectService(selectedService);
   }
 
 }

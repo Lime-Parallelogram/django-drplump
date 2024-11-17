@@ -14,7 +14,7 @@
         border: #dadada 5px solid;
 
         &.selected {
-            background-color: rgb(211, 82, 82);
+            background-color: var(--bs-primary);;
         }
     }
     

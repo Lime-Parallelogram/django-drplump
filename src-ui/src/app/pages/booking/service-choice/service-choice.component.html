@@ -1,6 +1,13 @@
 <div class="container">
     <h2> Chose which service you would like to book</h2>
     <div class="our_services">
-        <app-services id="services-booking"></app-services>
+        <app-services id="services-booking" [selectable]=true (serviceSelected)="updateSummary($event)"></app-services>
     </div>
+
+    <div class="price_summary" *ngIf="selectedService">
+        <div class="summary_field">Your Treatment: <span>{{selectedService.Name}}</span></div>
+        <div class="summary_field">Total Price: <span>£{{selectedService.Price}}</span></div>
+    </div>
+
+    <button type="button" class="btn btn-primary">Continue</button>
 </div>

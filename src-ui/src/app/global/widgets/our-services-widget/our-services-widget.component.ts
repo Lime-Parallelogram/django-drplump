@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { OurServicesService, Service } from 'src/app/services/our-services.service';
@@ -14,17 +14,19 @@ export class OurServicesWidgetComponent implements OnInit {
   services?: Service[];
 
   @Input() selectable = false;
-  @Output() selected_service?: Service;
+  selected_service?: Service;
+  @Output() serviceSelected = new EventEmitter<Service>();
 
   constructor(private ourServicesService: OurServicesService) { }
 
   chooseService(service: Service) {
     this.selected_service = service;
+    this.serviceSelected.emit(service);
   }
 
   ngOnInit(): void {
     // Request list of services from server on component load
-    this.ourServicesService.getServices().subscribe(response => this.services = response)
+    this.ourServicesService.getServices().subscribe(response => this.services = response);
   }
 
 }
