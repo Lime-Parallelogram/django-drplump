@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { BookingService } from 'src/app/services/booking.service';
 import { Service } from 'src/app/services/our-services.service';
 
@@ -9,7 +10,7 @@ import { Service } from 'src/app/services/our-services.service';
 })
 export class ServiceChoiceComponent implements OnInit {
 
-  constructor(private bookingService: BookingService) { }
+  constructor(private bookingService: BookingService, private router: Router) { }
 
   selectedService?: Service;
 
@@ -19,6 +20,13 @@ export class ServiceChoiceComponent implements OnInit {
   updateSummary(selectedService: Service) {
     this.selectedService = selectedService;
     this.bookingService.selectService(selectedService);
+  }
+
+  continueClick() {
+    if (this.bookingService.chosenService) {
+      this.router.navigate(["/book/appointment-selection"]);
+    }
+    
   }
 
 }

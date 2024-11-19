@@ -1,24 +1,22 @@
 import { Injectable } from '@angular/core';
 import { Service } from './our-services.service';
-
-export interface BookingRequest {
-  service: Service;
-  giftCardCode?: string;
-}
-
+import { Appointment } from './appointments.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BookingService {
 
-  public activeBooking?: BookingRequest;
+  public chosenService?: Service;
+  public myAppointment?: Appointment;
 
   constructor() { }
 
   public selectService(service: Service) {
-    this.activeBooking = {
-      service: service
-    };
+    this.chosenService = service;
+  }
+
+  public selectAppointment(appointment: Appointment) {
+    this.myAppointment = appointment;
   }
 }

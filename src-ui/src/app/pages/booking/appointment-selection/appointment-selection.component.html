@@ -1,0 +1,3 @@
+<h2>Select an appointment:</h2>
+<app-bookings-calendar-widget (appointmentSelected)="bookingService.selectAppointment($event)"></app-bookings-calendar-widget>
+<button type="button" class="btn btn-primary" (click)="continueClick()" [class.disabled]="!bookingService.myAppointment">Continue</button>

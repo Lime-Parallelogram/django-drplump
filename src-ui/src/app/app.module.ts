@@ -12,6 +12,9 @@ import { IndexComponent } from './pages/index/index.component';
 import { BookingComponent } from './pages/booking/booking.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ServiceChoiceComponent } from './pages/booking/service-choice/service-choice.component';
+import { AppointmentSelectionComponent } from './pages/booking/appointment-selection/appointment-selection.component';
+import { BookingsCalendarWidgetComponent } from './global/widgets/bookings-calendar-widget/bookings-calendar-widget.component';
+import { DayPilotModule } from '@daypilot/daypilot-lite-angular';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,9 @@ import { ServiceChoiceComponent } from './pages/booking/service-choice/service-c
     AboutComponent,
     IndexComponent,
     BookingComponent,
-    ServiceChoiceComponent
+    ServiceChoiceComponent,
+    AppointmentSelectionComponent,
+    BookingsCalendarWidgetComponent
   ],
   imports: [
     BrowserModule,
@@ -30,9 +35,13 @@ import { ServiceChoiceComponent } from './pages/booking/service-choice/service-c
     RouterModule.forRoot([
       { path: '', component: IndexComponent },
       { path: 'about', component: AboutComponent },
-      { path: 'book', component: BookingComponent },
+      { path: 'book', component: BookingComponent, children:[
+        { path: '', component: ServiceChoiceComponent },
+        { path: 'appointment-selection', component: AppointmentSelectionComponent }
+      ] },
     ]),
     HttpClientModule,
+    DayPilotModule
   ],
   providers: [],
   bootstrap: [AppComponent]
