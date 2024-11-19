@@ -11,3 +11,7 @@ class AppointmentList(generics.ListCreateAPIView):
 class AppointmentDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Appointment.objects.all()
     serializer_class = AppointmentSerializer
+
+    def perform_update(self, serializer):
+        # TODO Complete Update Method
+        print("Updating model")

@@ -15,6 +15,9 @@ import { ServiceChoiceComponent } from './pages/booking/service-choice/service-c
 import { AppointmentSelectionComponent } from './pages/booking/appointment-selection/appointment-selection.component';
 import { BookingsCalendarWidgetComponent } from './global/widgets/bookings-calendar-widget/bookings-calendar-widget.component';
 import { DayPilotModule } from '@daypilot/daypilot-lite-angular';
+import { PaymentComponent } from './pages/booking/payment/payment.component';
+import { PaymentCallbackComponent } from './pages/booking/payment-callback/payment-callback.component';
+import { ConfirmComponent } from './pages/booking/confirm/confirm.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,10 @@ import { DayPilotModule } from '@daypilot/daypilot-lite-angular';
     BookingComponent,
     ServiceChoiceComponent,
     AppointmentSelectionComponent,
-    BookingsCalendarWidgetComponent
+    BookingsCalendarWidgetComponent,
+    PaymentComponent,
+    PaymentCallbackComponent,
+    ConfirmComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +43,10 @@ import { DayPilotModule } from '@daypilot/daypilot-lite-angular';
       { path: 'about', component: AboutComponent },
       { path: 'book', component: BookingComponent, children:[
         { path: '', component: ServiceChoiceComponent },
-        { path: 'appointment-selection', component: AppointmentSelectionComponent }
+        { path: 'appointment-selection', component: AppointmentSelectionComponent },
+        { path: 'pay', component: PaymentComponent },
+        { path: 'paymentCallback', component: PaymentCallbackComponent },
+        { path: 'confirm', component: ConfirmComponent }
       ] },
     ]),
     HttpClientModule,

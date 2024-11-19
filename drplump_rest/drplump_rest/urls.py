@@ -24,12 +24,12 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     path("api/services/", restmain.views.ServiceList.as_view()),
-    path("api/services/<int:ID>", restmain.views.ServiceDetail.as_view()),
+    path("api/services/<int:pk>", restmain.views.ServiceDetail.as_view()),
 
     path("api/appointments/", appointments.views.AppointmentList.as_view()),
-    path("api/appointments/<int:ID>", appointments.views.AppointmentList.as_view()),
+    path("api/appointments/<int:pk>", appointments.views.AppointmentDetail.as_view()),
 
-    path("api/users/<int:ID>", users.views.UserDetail.as_view()),
+    path("api/users/<int:pk>", users.views.UserDetail.as_view()),
     path("api/users/register", users.views.UserRegiser.as_view()),
     path("api/users/login", users.views.UserLogin.as_view()),
 ]
