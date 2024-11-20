@@ -1,0 +1,4 @@
+<div class="account_element_container">
+    <a class="nav-link" href="/login" *ngIf="!userService.authenticatedUser">Sign In</a>
+    <a class="nav-link" *ngIf="userService.authenticatedUser" (click)="userService.logout()">{{ userService.authenticatedUser.name }}</a>
+</div>

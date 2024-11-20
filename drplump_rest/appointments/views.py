@@ -1,5 +1,7 @@
-from rest_framework import generics # Perform generic operations on models (like get, set, delete, etc.)
+from rest_framework import generics, status # Perform generic operations on models (like get, set, delete, etc.)
+from rest_framework.exceptions import APIException
 
+import requests
 from .models import Appointment
 from .serializers import AppointmentSerializer
 
@@ -13,5 +15,13 @@ class AppointmentDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = AppointmentSerializer
 
     def perform_update(self, serializer):
-        # TODO Complete Update Method
-        print("Updating model")
+        if (self.request.query_params.get("token")):
+            response = requests.post("http://localhost:3000/api/process", json={"token": self.request.query_params.get("token"), "amount": 10})
+            print(response.json())
+
+            if (response.status_code == 200):
+                serializer.save()
+            else:
+                raise APIException({"message": "Invalid payment token provided"}, code=status.HTTP_406_NOT_ACCEPTABLE)
+        else:
+            raise APIException({"message": "No payment token provided"}, status=status.HTTP_402_PAYMENT_REQUIRED)

@@ -18,6 +18,10 @@ import { DayPilotModule } from '@daypilot/daypilot-lite-angular';
 import { PaymentComponent } from './pages/booking/payment/payment.component';
 import { PaymentCallbackComponent } from './pages/booking/payment-callback/payment-callback.component';
 import { ConfirmComponent } from './pages/booking/confirm/confirm.component';
+import { AuthenticatedUserGuard } from './guards/authenticated-user.guard';
+import { LoginComponent } from './pages/login/login.component';
+import { NavbarAccountComponent } from './global/widgets/navbar-account/navbar-account.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -33,20 +37,24 @@ import { ConfirmComponent } from './pages/booking/confirm/confirm.component';
     BookingsCalendarWidgetComponent,
     PaymentComponent,
     PaymentCallbackComponent,
-    ConfirmComponent
+    ConfirmComponent,
+    LoginComponent,
+    NavbarAccountComponent
   ],
   imports: [
     BrowserModule,
     NgbModule,
+    FormsModule,
     RouterModule.forRoot([
       { path: '', component: IndexComponent },
       { path: 'about', component: AboutComponent },
+      { path: 'login', component: LoginComponent },
       { path: 'book', component: BookingComponent, children:[
         { path: '', component: ServiceChoiceComponent },
-        { path: 'appointment-selection', component: AppointmentSelectionComponent },
-        { path: 'pay', component: PaymentComponent },
-        { path: 'paymentCallback', component: PaymentCallbackComponent },
-        { path: 'confirm', component: ConfirmComponent }
+        { path: 'appointment-selection', component: AppointmentSelectionComponent, canActivate: [AuthenticatedUserGuard] },
+        { path: 'pay', component: PaymentComponent, canActivate: [AuthenticatedUserGuard] },
+        { path: 'paymentCallback', component: PaymentCallbackComponent, canActivate: [AuthenticatedUserGuard] },
+        { path: 'confirm', component: ConfirmComponent, canActivate: [AuthenticatedUserGuard] }
       ] },
     ]),
     HttpClientModule,

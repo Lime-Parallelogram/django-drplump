@@ -2,6 +2,8 @@ from rest_framework import generics, status # Perform generic operations on mode
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
+import json
+
 from .models import User
 from .serializers import UserSerializer
 
@@ -23,16 +25,15 @@ class UserRegiser(generics.CreateAPIView):
         serializer.save()
 
 class UserLogin(APIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-
     def post(self, request):
-        
-        if User.objects.filter(
+
+        userAccount = User.objects.filter(
             email=request.data.get("email"),
-            password_hash=request.data.get("password_hash")):
-            
-            return Response({"message": "login sucessful"}, status=status.HTTP_200_OK)
+            password_hash=request.data.get("password_hash"))
+        
+        if userAccount:
+            serializer = UserSerializer(userAccount.first())
+            return Response(serializer.data, status=status.HTTP_200_OK)
         
         else:
             return Response({"message": "no such username and password"}, status=status.HTTP_401_UNAUTHORIZED)

@@ -1,0 +1,32 @@
+<div class="outer">
+    <h1>Login or Register </h1>
+
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <div class="nav-link" [class.active]="!register" (click)="register = false">Login</div>
+        </li>
+        <li class="nav-item">
+          <div class="nav-link" [class.active]="register" (click)="register = true">Register</div>
+        </li>
+      </ul>
+
+    <div class="form_container">
+        <div class="mb-3" *ngIf="register">
+        <label for="exampleInputEmail1" class="form-label">Your Name</label>
+        <input type="email" class="form-control" [(ngModel)]="name">
+        </div>
+
+        <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email address</label>
+        <input type="email" class="form-control" aria-describedby="emailHelp" [(ngModel)]="email">
+        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        </div>
+
+        <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input type="password" class="form-control" [(ngModel)]="password">
+        </div>
+        <button class="btn btn-primary" (click)="submitClick()">Submit</button>
+        <div class="form-error text-danger mt-3">{{ errorText }}</div>
+    </div>
+</div>

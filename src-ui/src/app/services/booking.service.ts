@@ -3,6 +3,7 @@ import { Service } from './our-services.service';
 import { Appointment, AppointmentsService } from './appointments.service';
 import { from, Observable } from 'rxjs';
 import { HttpResponse } from '@angular/common/http';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class BookingService {
   };
   public myAppointment?: Appointment;
 
-  constructor(private appointmentService: AppointmentsService) { }
+  constructor(private appointmentService: AppointmentsService, private userService: UserService) { }
 
   public selectService(service: Service) {
     this.chosenService = service;
@@ -47,7 +48,8 @@ export class BookingService {
   }
 
   public placeBooking(paymentToken: string): Observable<HttpResponse<Object>> | undefined {
-    if (this.appointment) {
+    if (this.appointment && this.userService.authenticatedUser) {
+      this.appointment.user_id = this.userService.authenticatedUser.user_id;
       return this.appointmentService.updateAppointment(this.appointment, paymentToken);
     }
 
