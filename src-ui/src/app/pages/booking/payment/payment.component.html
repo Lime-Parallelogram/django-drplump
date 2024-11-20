@@ -1,4 +1,28 @@
 <h2>Payment</h2>
-<h4>Total Payment: £{{bookingService.getTotalPayable()}}</h4>
 
+<div class="mb-3">
+    <label for="basic-url" class="form-label">Reem Gift Card</label>
+    
+    <div class="row">
+      <div class="col-auto">
+        <label for="inputPassword2" class="visually-hidden">Gift Card Code</label>
+        <input type="text" class="form-control" placeholder="Example: PL00GJKQ69ED1JKT" style="min-width: 320px;" [(ngModel)]="giftCardCode">
+      </div>
+      <div class="col-auto">
+        <button type="submit" class="btn btn-primary mb-3" (click)="giftCardRedeem()">Redeem</button>
+      </div>  
+    </div>
+    
+  
+    <div class="form-text" id="basic-addon4">Gift cards can be used for a maximum of 80% the total price.</div>
+    <div class="form-text text-danger">{{giftCardProblemText}}</div>
+</div>
+
+<br>
+<h5>Service Total: £{{currentCost.serviceTotal}}</h5>
+<h5>Taxes: £{{currentCost.taxes}}</h5>
+<h5>Reductions: -£{{-currentCost.reductions}}</h5>
+<h5>Booking Fee: £{{currentCost.booking_fee}}</h5>
+<h4>Total Payment: £{{bookingService.getTotalPayable(currentCost)}}</h4>
+<br>
 <button type="button" class="btn btn-primary" (click)="payByCardClick()">Pay By Card</button>

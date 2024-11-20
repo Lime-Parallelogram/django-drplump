@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'appointments.apps.AppointmentsConfig',
     'reviews.apps.ReviewsConfig',
+    'giftcard.apps.GiftcardConfig',
 ]
 
 MIDDLEWARE = [

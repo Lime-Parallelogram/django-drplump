@@ -20,6 +20,7 @@ import restmain.views
 import appointments.views
 import users.views
 import reviews.views
+import giftcard.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -36,4 +37,6 @@ urlpatterns = [
 
     path("api/reviews/", reviews.views.ReviewList.as_view()),
     path("api/reviews/<int:pk>", reviews.views.ReviewDetail.as_view()),
+
+    path("api/giftcard/getValue", giftcard.views.CheckCode.as_view())
 ]

@@ -5,6 +5,13 @@ import { from, Observable } from 'rxjs';
 import { HttpResponse } from '@angular/common/http';
 import { UserService } from './user.service';
 
+export interface PaymentBreakdown {
+  serviceTotal: number;
+  taxes: number;
+  reductions: number;
+  booking_fee: number;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -43,8 +50,17 @@ export class BookingService {
 
   // ─── Payment Related ─────────────────────────────────────────────────
 
-  public getTotalPayable(): number {
-    return this.chosenService?.Price
+  public getPaymentBreakdown(): PaymentBreakdown {
+    return {
+      serviceTotal: this.chosenService?.Price,
+      taxes: this.chosenService?.Price * 0.2,
+      reductions: 0,
+      booking_fee: 5.00
+    }
+  }
+
+  public getTotalPayable(breakdown: PaymentBreakdown) {
+    return breakdown.serviceTotal + breakdown.booking_fee + breakdown.reductions + breakdown.taxes;
   }
 
   public placeBooking(paymentToken: string): Observable<HttpResponse<Object>> | undefined {
