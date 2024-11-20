@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { OurServicesWidgetComponent } from './global/widgets/our-services-widget/our-services-widget.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 import { NavbarComponent } from './global/navbar/navbar.component';
 import { FooterComponent } from './global/footer/footer.component';
 import { AboutComponent } from './pages/about/about.component';
@@ -22,6 +22,7 @@ import { AuthenticatedUserGuard } from './guards/authenticated-user.guard';
 import { LoginComponent } from './pages/login/login.component';
 import { NavbarAccountComponent } from './global/widgets/navbar-account/navbar-account.component';
 import { FormsModule } from '@angular/forms';
+import { ReviewPanelComponent } from './global/widgets/review-panel/review-panel.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { FormsModule } from '@angular/forms';
     PaymentCallbackComponent,
     ConfirmComponent,
     LoginComponent,
-    NavbarAccountComponent
+    NavbarAccountComponent,
+    ReviewPanelComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +60,8 @@ import { FormsModule } from '@angular/forms';
       ] },
     ]),
     HttpClientModule,
-    DayPilotModule
+    DayPilotModule,
+    NgbRatingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

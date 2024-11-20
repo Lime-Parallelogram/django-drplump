@@ -1,13 +1,12 @@
 <div class="outer_container">
+    Average Rating:   {{reviewService.calculateAverage()}}/5
     <div class="reviews_flex">
-        <div class="card" style="width: 18rem;">
-            <div class="card-image-top">
-                
-            </div>
+        <div class="card m-2" style="width: 18rem;" *ngFor="let review of reviewService.reviews">
             <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                <h3><ngb-rating [readonly]="true" [max]="5" [(rate)]="review.rating"></ngb-rating></h3>
+                <h5 class="card-title">{{review.title}}</h5>
+                <p class="card-text">{{review.content}}</p>
+                <p class="text-secondary">{{review.user_name}} | {{review.date}}</p>
             </div>
         </div>
     </div>

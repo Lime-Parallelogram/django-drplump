@@ -1,4 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 
-$primary: #aa0088;
-$secondary: #ff80b2;
+
+* {
+    --bs-primary: #aa0088;
+    --bs-secondary: #ff80b2;
+    --bs-primary-rgb: 170, 0, 136;
+    --bs-secondary-rgb: 255, 128, 178;
+}
