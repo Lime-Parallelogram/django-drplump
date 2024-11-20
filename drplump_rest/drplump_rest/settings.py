@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'restmain.apps.RestmainConfig',
     'users.apps.UsersConfig',
-    'appointments.apps.AppointmentsConfig'
+    'appointments.apps.AppointmentsConfig',
+    'reviews.apps.ReviewsConfig',
 ]
 
 MIDDLEWARE = [
