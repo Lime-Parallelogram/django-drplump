@@ -23,7 +23,6 @@ import { LoginComponent } from './pages/login/login.component';
 import { NavbarAccountComponent } from './global/widgets/navbar-account/navbar-account.component';
 import { FormsModule } from '@angular/forms';
 import { ReviewPanelComponent } from './global/widgets/review-panel/review-panel.component';
-import { StarRatingModule } from 'angular-star-rating';
 
 @NgModule({
   declarations: [
@@ -60,7 +59,6 @@ import { StarRatingModule } from 'angular-star-rating';
         { path: 'confirm', component: ConfirmComponent, canActivate: [AuthenticatedUserGuard] }
       ] },
     ]),
-    StarRatingModule.forRoot(),
     HttpClientModule,
     DayPilotModule
   ],
