@@ -20,7 +20,7 @@ export class BookingService {
   public chosenService?: Service = {
     ID: 1,
     Name: "FILLERS",
-    Price: 190,
+    Price: 76,
     Description: "TEST",
     ImageURL: ""
   };
@@ -53,14 +53,14 @@ export class BookingService {
   public getPaymentBreakdown(): PaymentBreakdown {
     return {
       serviceTotal: this.chosenService?.Price,
-      taxes: this.chosenService?.Price * 0.2,
+      taxes: Math.fround(this.chosenService?.Price * 20) / 100,
       reductions: 0,
       booking_fee: 5.00
     }
   }
 
   public getTotalPayable(breakdown: PaymentBreakdown) {
-    return breakdown.serviceTotal + breakdown.booking_fee + breakdown.reductions + breakdown.taxes;
+    return Math.fround((breakdown.serviceTotal + breakdown.booking_fee + breakdown.reductions + breakdown.taxes) * 100) /100;
   }
 
   public placeBooking(paymentToken: string): Observable<HttpResponse<Object>> | undefined {
