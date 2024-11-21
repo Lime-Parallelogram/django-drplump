@@ -6,7 +6,6 @@ from rest_framework.response import Response
 from django.db import connection
 
 from .models import GiftCard
-from .serializers import GiftCardSerializer
 
 from .database_engine_compatibility import executeQuery
 
