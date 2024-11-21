@@ -16,7 +16,7 @@ class AppointmentDetail(generics.RetrieveUpdateDestroyAPIView):
 
     def perform_update(self, serializer):
         if (self.request.query_params.get("token")):
-            response = requests.post("http://localhost:3000/api/process", json={"token": self.request.query_params.get("token"), "amount": 10})
+            response = requests.post("http://mrpayment.limeparallelogram.uk/api/process", json={"token": self.request.query_params.get("token"), "amount": 10})
             print(response.json())
 
             if (response.status_code == 200):
