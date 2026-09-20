@@ -1,0 +1,6 @@
+<div class="container">
+    <h1>Welcome <i>{{ userService.authenticatedUser?.name }}</i> </h1>
+    <hr>
+    <a href="/acccount/profile">Manage My Profile</a> | <a href="/account/treatments">My Treatments</a> | <a href="" (click)="userService.logout()">Sign Out</a>
+    <router-outlet></router-outlet>
+</div>

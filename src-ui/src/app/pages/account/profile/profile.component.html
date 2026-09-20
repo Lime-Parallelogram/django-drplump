@@ -1,0 +1,18 @@
+<div class="outer">
+    <h1>Manage my Profile</h1>
+
+    <div class="form_container">
+        <div class="mb-3">
+            <label for="profileNameInput" class="form-label">Your Name</label>
+            <input name="profileNameInput" type="text" class="form-control" [(ngModel)]="name">
+        </div>
+
+        <div class="mb-3">
+            <label for="profileIconInput" class="form-label">Profile Photo</label>
+            <input type="file" name="profileIconInput" class="form-control" accept="image/*">
+        </div>
+
+        <button class="btn btn-primary" (click)="submitClick()">Submit</button>
+        <div class="form-error text-danger mt-3">{{ errorText }}</div>
+    </div>
+</div>

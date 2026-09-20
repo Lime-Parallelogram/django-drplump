@@ -23,6 +23,9 @@ import { LoginComponent } from './pages/login/login.component';
 import { NavbarAccountComponent } from './global/widgets/navbar-account/navbar-account.component';
 import { FormsModule } from '@angular/forms';
 import { ReviewPanelComponent } from './global/widgets/review-panel/review-panel.component';
+import { ProfileComponent } from './pages/account/profile/profile.component';
+import { TreatmentsComponent } from './pages/account/treatments/treatments.component';
+import { AccountComponent } from './pages/account/account.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +44,10 @@ import { ReviewPanelComponent } from './global/widgets/review-panel/review-panel
     ConfirmComponent,
     LoginComponent,
     NavbarAccountComponent,
-    ReviewPanelComponent
+    ReviewPanelComponent,
+    ProfileComponent,
+    TreatmentsComponent,
+    AccountComponent
   ],
   imports: [
     BrowserModule,
@@ -58,6 +64,10 @@ import { ReviewPanelComponent } from './global/widgets/review-panel/review-panel
         { path: 'paymentCallback', component: PaymentCallbackComponent, canActivate: [AuthenticatedUserGuard] },
         { path: 'confirm', component: ConfirmComponent, canActivate: [AuthenticatedUserGuard] }
       ] },
+      { path: 'account', component: AccountComponent, children: [
+        { path: 'profile', component: ProfileComponent },
+        { path: 'treatments', component: TreatmentsComponent }
+      ]}
     ]),
     HttpClientModule,
     DayPilotModule,

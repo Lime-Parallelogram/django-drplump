@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
       return false;
     }
 
-    let regexp = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d){2,}(?=.*LIPS)(?=.*[@$!%*?&]){4,}[A-Za-z\d@$!%*?&]{0,}$/gm);
+    let regexp = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d){2,}(?=.*LIPS)(?=.*[@$!%"£*?&]){4,}[A-Za-z\d@$"£!%*?&]{0,}$/gm);
 
     if (!regexp.exec(this.password)) {
       this.errorText = "Password must contain a lower-case letter, at least 4 special characters, 2 numbers and the word 'LIPS'."
