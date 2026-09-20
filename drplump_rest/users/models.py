@@ -7,4 +7,5 @@ class User(models.Model):
     name = models.TextField(max_length=100)
     email = models.EmailField(unique=True)
     password_hash = models.TextField(max_length=100)
+    profile_image = models.URLField(null=True)
 
