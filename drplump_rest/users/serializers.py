@@ -8,5 +8,6 @@ class UserSerializer(serializers.ModelSerializer):
             "user_id",
             "name",
             "email",
-            "password_hash"
+            "password_hash",
+            "profile_image"
         ]

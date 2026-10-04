@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, tap } from 'rxjs';
+import { catchError, Observable, of, tap } from 'rxjs';
 import * as shajs from 'sha.js';
 
 export interface User {
@@ -72,5 +72,24 @@ export class UserService {
 
   public logout() {
     this.authenticatedUser = undefined;
+  }
+
+  public uploadProfilePhoto(newPhoto: File): Observable<HttpResponse<any>|false> {
+    if (this.authenticatedUser) {
+      var formData = new FormData();
+      formData.append("file",  newPhoto);
+      return this.http.post(`/api/users/profile_photo`, formData, {observe: "response"})
+    }
+    
+    return of(false)
+  }
+
+  public updateProfile(name: string, inputFile: FormData) {
+    if (this.authenticatedUser) {
+      var formData = new FormData();
+      formData.append("name", name);
+      ////formData.append("file",  inputValue.files[0]);
+      this.http.post("/api/users/profile_photo", inputFile, {observe: "response"})
+    }
   }
 }

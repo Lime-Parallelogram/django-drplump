@@ -25,6 +25,7 @@ class ServiceSerializer(serializers.ModelSerializer):
             "Description",
             "Price",
             "ImageURL",
+            "exclusive",
         ]
 
         # Allows things to be optional

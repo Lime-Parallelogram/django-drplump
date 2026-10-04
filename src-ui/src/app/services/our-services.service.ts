@@ -23,7 +23,7 @@ export class OurServicesService {
    * @returns An observable containing all currently available treatments at the clinic
    */
   getServices(): Observable<Service[]> {
-    return this.http.get("api/services").pipe(retry(3)).pipe(
+    return this.http.get("api/services?exclusive=false").pipe(retry(3)).pipe(
       map(resp => <Service[]>resp)
     );
   }

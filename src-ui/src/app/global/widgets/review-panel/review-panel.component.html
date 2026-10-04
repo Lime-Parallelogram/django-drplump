@@ -5,7 +5,8 @@
             <div class="card-body">
                 <h3><ngb-rating [readonly]="true" [max]="5" [(rate)]="review.rating"></ngb-rating></h3>
                 <h5 class="card-title">{{review.title}}</h5>
-                <p class="card-text">{{review.content}}</p>
+                <!-- Deliberately bypass security to allow XSS in review content -->
+                <p class="card-text" [innerHTML]="sanitizer.bypassSecurityTrustHtml(review.content)"></p>
                 <p class="text-secondary">{{review.user_name}} | {{review.date}}</p>
             </div>
         </div>

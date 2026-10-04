@@ -34,6 +34,7 @@ urlpatterns = [
     path("api/users/<int:pk>", users.views.UserDetail.as_view()),
     path("api/users/register", users.views.UserRegiser.as_view()),
     path("api/users/login", users.views.UserLogin.as_view()),
+    path("api/users/profile_photo", users.views.UserPhotoUpload.as_view()),
 
     path("api/reviews/", reviews.views.ReviewList.as_view()),
     path("api/reviews/<int:pk>", reviews.views.ReviewDetail.as_view()),

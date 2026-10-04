@@ -14,8 +14,17 @@ export class ProfileComponent {
     this.name = userService.authenticatedUser?.name;
   }
 
+  fileUploaded(event: any) {
+    if (event.target.files.length > 0) {
+      console.log("Uploading")
+      this.userService.uploadProfilePhoto(event.target.files[0]).subscribe((response) => {
+        console.log(response)
+      })
+    }
+  }
+
   submitClick() {
-    
+    ///this.userService.updateProfile("steve", )
   }
 
 }

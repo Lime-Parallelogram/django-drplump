@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { ReviewService } from 'src/app/services/review.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { ReviewService } from 'src/app/services/review.service';
 })
 export class ReviewPanelComponent implements OnInit {
 
-  constructor(public reviewService: ReviewService) { }
+  constructor(public reviewService: ReviewService, public sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {}
 
