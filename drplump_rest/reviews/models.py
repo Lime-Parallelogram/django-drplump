@@ -12,4 +12,14 @@ class Review(models.Model):
     title = models.TextField(max_length=100)
     content = models.TextField(max_length=2000)
     date = models.DateField()
-    treatment_type = models.ForeignKey(Service, models.CASCADE)
+
+    def treatment_type(self):
+        if self.appointment_id.service_id is None:
+            return "Unspecified Treatment"
+        return str(self.appointment_id.service_id)
+    
+    def user_name(self):
+        return str(self.appointment_id.user_id)
+    
+    def __str__(self):
+        return self.title

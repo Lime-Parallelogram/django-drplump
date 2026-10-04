@@ -1,4 +1,5 @@
 from django.db import models
+from django.apps import apps
 
 from users.models import User
 from restmain.models import Service
@@ -20,6 +21,14 @@ class Appointment(models.Model):
 
     start = models.DateTimeField()
     end = models.DateTimeField()
+
+    # Derived values used on client
+    def is_reviewed(self):
+        exists = apps.get_model("reviews.Review").objects.filter(appointment_id=self.appointment_id).exists()
+        return exists
+    
+    def service_name(self):
+        return str(self.service_id)
 
     def __str__(self):
         if self.user_id is not None:

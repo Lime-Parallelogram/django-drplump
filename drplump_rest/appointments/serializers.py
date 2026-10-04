@@ -5,8 +5,13 @@ class AppointmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Appointment
         fields = [
+            "status",
             "appointment_id",
             "user_id",
             "start",
-            "end"
+            "end",
+
+            # Derived Attributes
+            "is_reviewed",
+            "service_name"
         ]

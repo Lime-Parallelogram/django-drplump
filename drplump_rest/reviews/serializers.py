@@ -13,5 +13,7 @@ class ReviewSerializer(serializers.ModelSerializer):
             "title",
             "content",
             "date",
+            # Derived attributes
             "treatment_type",
+            "user_name"
         ]

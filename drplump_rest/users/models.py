@@ -9,3 +9,5 @@ class User(models.Model):
     password_hash = models.TextField(max_length=100)
     profile_image = models.URLField(null=True)
 
+    def __str__(self) -> str:
+        return self.name

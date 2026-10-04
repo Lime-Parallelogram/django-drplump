@@ -1,1 +1,55 @@
-<p>treatments works!</p>
+<div class="outer">
+    <h1>My Appointments</h1>
+
+    <table class="table">
+        <tr>
+            <th>Status</th>
+            <th>Appointment Type</th>
+            <th>Date/Time</th>
+            <th>Total Cost</th>
+            <th>Actions</th>
+        </tr>
+
+        <tr *ngFor="let appointment of myAppointments">
+            <td>{{ appointment.status }}</td>
+            <td>{{ appointment.service_name }}</td>
+            <td>{{ appointment.start }}</td>
+            <td>£99</td>
+
+            <!-- Actions -->
+            <td>
+                <button>Cancel Booking</button>
+                <button (click)="open(reviewModal, appointment.appointment_id)" [disabled]="appointment.is_reviewed">Leave Review</button>
+                <button>Download Receipt</button>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<!-- Modal -->
+<ng-template #reviewModal let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Leave Review</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+		<form>
+            <div class="mb-3 fs-3">
+				<ngb-rating [max]="5" name="Rating" [(ngModel)]="newReview.rating"/>
+			</div>
+
+			<div class="mb-3">
+				<label for="Review Title" class="form-label">Review Title</label>
+                <input name="Review Title" type="text" class="form-control" [(ngModel)]="newReview.title">
+			</div>
+
+            <div class="mb-3">
+				<label for="Content" class="form-label">Content</label>
+                <textarea name="Content" type="textarea" class="form-control" [(ngModel)]="newReview.content"></textarea>
+			</div>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-outline-secondary" (click)="modal.close('Save click')">Submit</button>
+	</div>
+</ng-template>

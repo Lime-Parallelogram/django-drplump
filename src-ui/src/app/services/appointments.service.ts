@@ -9,12 +9,23 @@ export interface AppointmentTime {
 }
 
 export interface Appointment {
+  status: "CONFIRMED" | "RESERVABLE" | "AVAILABLE";
   appointment_id: number;
   user_id?: number;
+  service_id: number;
 
   start: string;
   end: string;
 
+  
+}
+
+/**
+ * Derived attributes are sent from the server but not submitted back
+ */
+export interface AppointmentEnhanced extends Appointment {
+  is_reviewed: boolean
+  service_name: string
 }
 
 @Injectable({
@@ -24,9 +35,9 @@ export class AppointmentsService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getAppointments(): Observable<Appointment[]> {
+  getAppointments(): Observable<AppointmentEnhanced[]> {
     return this.httpClient.get("/api/appointments").pipe(
-      map(resp => <Appointment[]>resp)
+      map(resp => <AppointmentEnhanced[]>resp)
     )
   }
 

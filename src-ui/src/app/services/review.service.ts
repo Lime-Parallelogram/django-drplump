@@ -4,8 +4,8 @@ import { catchError, map, tap } from 'rxjs';
 import { User } from './user.service';
 
 export interface Review {
-  review_id: number;
-  user_id: number,
+  review_id?: number;
+  appointment_id: number,
   user_name?: string,
 
   rating: number,
@@ -39,6 +39,10 @@ export class ReviewService {
 
     }
     return this._reviews
+  }
+
+  public createReview(newReview: Review) {
+    return this.http.post("/api/reviews/", newReview, { observe: "response" })
   }
 
   public calculateAverage() {
