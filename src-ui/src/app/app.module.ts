@@ -10,7 +10,7 @@ import { FooterComponent } from './global/footer/footer.component';
 import { AboutComponent } from './pages/about/about.component';
 import { IndexComponent } from './pages/index/index.component';
 import { BookingComponent } from './pages/booking/booking.component';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ServiceChoiceComponent } from './pages/booking/service-choice/service-choice.component';
 import { AppointmentSelectionComponent } from './pages/booking/appointment-selection/appointment-selection.component';
 import { BookingsCalendarWidgetComponent } from './global/widgets/bookings-calendar-widget/bookings-calendar-widget.component';
@@ -27,53 +27,46 @@ import { ProfileComponent } from './pages/account/profile/profile.component';
 import { TreatmentsComponent } from './pages/account/treatments/treatments.component';
 import { AccountComponent } from './pages/account/account.component';
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    OurServicesWidgetComponent,
-    NavbarComponent,
-    FooterComponent,
-    AboutComponent,
-    IndexComponent,
-    BookingComponent,
-    ServiceChoiceComponent,
-    AppointmentSelectionComponent,
-    BookingsCalendarWidgetComponent,
-    PaymentComponent,
-    PaymentCallbackComponent,
-    ConfirmComponent,
-    LoginComponent,
-    NavbarAccountComponent,
-    ReviewPanelComponent,
-    ProfileComponent,
-    TreatmentsComponent,
-    AccountComponent
-  ],
-  imports: [
-    BrowserModule,
-    NgbModule,
-    FormsModule,
-    RouterModule.forRoot([
-      { path: '', component: IndexComponent },
-      { path: 'about', component: AboutComponent },
-      { path: 'login', component: LoginComponent },
-      { path: 'book', component: BookingComponent, children:[
-        { path: '', component: ServiceChoiceComponent },
-        { path: 'appointment-selection', component: AppointmentSelectionComponent, canActivate: [AuthenticatedUserGuard] },
-        { path: 'pay', component: PaymentComponent, canActivate: [AuthenticatedUserGuard] },
-        { path: 'paymentCallback', component: PaymentCallbackComponent, canActivate: [AuthenticatedUserGuard] },
-        { path: 'confirm', component: ConfirmComponent, canActivate: [AuthenticatedUserGuard] }
-      ] },
-      { path: 'account', component: AccountComponent, children: [
-        { path: 'profile', component: ProfileComponent },
-        { path: 'treatments', component: TreatmentsComponent }
-      ]}
-    ]),
-    HttpClientModule,
-    DayPilotModule,
-    NgbRatingModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent,
+        OurServicesWidgetComponent,
+        NavbarComponent,
+        FooterComponent,
+        AboutComponent,
+        IndexComponent,
+        BookingComponent,
+        ServiceChoiceComponent,
+        AppointmentSelectionComponent,
+        BookingsCalendarWidgetComponent,
+        PaymentComponent,
+        PaymentCallbackComponent,
+        ConfirmComponent,
+        LoginComponent,
+        NavbarAccountComponent,
+        ReviewPanelComponent,
+        ProfileComponent,
+        TreatmentsComponent,
+        AccountComponent
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        NgbModule,
+        FormsModule,
+        RouterModule.forRoot([
+            { path: '', component: IndexComponent },
+            { path: 'about', component: AboutComponent },
+            { path: 'login', component: LoginComponent },
+            { path: 'book', component: BookingComponent, children: [
+                    { path: '', component: ServiceChoiceComponent },
+                    { path: 'appointment-selection', component: AppointmentSelectionComponent, canActivate: [AuthenticatedUserGuard] },
+                    { path: 'pay', component: PaymentComponent, canActivate: [AuthenticatedUserGuard] },
+                    { path: 'paymentCallback', component: PaymentCallbackComponent, canActivate: [AuthenticatedUserGuard] },
+                    { path: 'confirm', component: ConfirmComponent, canActivate: [AuthenticatedUserGuard] }
+                ] },
+            { path: 'account', component: AccountComponent, children: [
+                    { path: 'profile', component: ProfileComponent },
+                    { path: 'treatments', component: TreatmentsComponent }
+                ] }
+        ]),
+        DayPilotModule,
+        NgbRatingModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule {}
