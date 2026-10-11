@@ -8,6 +8,7 @@ class AppointmentSerializer(serializers.ModelSerializer):
             "status",
             "appointment_id",
             "user_id",
+            "payment_ref",
             "start",
             "end",
 

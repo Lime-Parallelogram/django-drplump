@@ -3,8 +3,9 @@ import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
 
 export interface CodeValidationResponse {
-  found: boolean;
-  value: number;
+  valid: boolean;
+  value?: number;
+  value_remaining?: number;
 }
 
 @Injectable({
@@ -15,7 +16,7 @@ export class GiftcardService {
   constructor(private http: HttpClient) { }
 
   public getGiftCardValue(giftCardCode: string) {
-    return this.http.post("/api/giftcard/getValue", {code: giftCardCode}).pipe(
+    return this.http.post("/legacy/giftc/validate.php", {code: giftCardCode}).pipe(
       map(response => <CodeValidationResponse>response)
     )
   }

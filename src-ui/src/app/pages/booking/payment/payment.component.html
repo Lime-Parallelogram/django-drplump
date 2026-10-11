@@ -13,14 +13,11 @@
       </div>  
     </div>
     
-  
-    <div class="form-text" id="basic-addon4">Gift cards can be used for a maximum of 80% the total price.</div>
     <div class="form-text text-danger">{{giftCardProblemText}}</div>
 </div>
 
 <br>
 <h5>Service Total: £{{currentCost.serviceTotal}}</h5>
-<h5>Taxes: £{{currentCost.taxes}}</h5>
 <h5>Reductions: -£{{-currentCost.reductions}}</h5>
 <h5>Booking Fee: £{{currentCost.booking_fee}}</h5>
 <h4>Total Payment: £{{bookingService.getTotalPayable(currentCost)}}</h4>

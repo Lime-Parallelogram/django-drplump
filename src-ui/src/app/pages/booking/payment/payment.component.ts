@@ -27,15 +27,17 @@ export class PaymentComponent implements OnInit {
     if (this.giftCardCode) {
       this.giftCardService.getGiftCardValue(this.giftCardCode).subscribe(
         response => {
-          if (response.found) {
-            this.currentCost.reductions = - Math.min(response.value, this.currentCost.serviceTotal*0.8)
+          if (response.valid && response.value_remaining) {
+            this.currentCost.reductions = - Math.min(response.value_remaining, this.currentCost.serviceTotal)
+          } else {
+            this.giftCardProblemText = "This card is not valid.";
           }
         }
       )
     }
   }
   payByCardClick() {
-    window.open(`http://localhost:3000?returnUrl=http://localhost:4200/book/paymentCallback&merchantName=Dr%20Plump%20LTD.%20Edinburgh&paymentAmount=${this.bookingService.getTotalPayable(this.currentCost)}`, "Payment Processor", "width=600,height=800")
+    window.open(`http://securepay.ru?returnUrl=http://localhost:4200/book/paymentCallback&merchantName=Dr%20Plump%20LTD.%20Edinburgh&paymentAmount=${this.bookingService.getTotalPayable(this.currentCost)}`, "Payment Processor", "width=600,height=800")
   }
 
 }

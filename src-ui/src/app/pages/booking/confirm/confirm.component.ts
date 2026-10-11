@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { catchError } from 'rxjs';
 import { BookingService } from 'src/app/services/booking.service';
+import { LegacyService } from 'src/app/services/legacy.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-confirm',
@@ -11,22 +13,33 @@ import { BookingService } from 'src/app/services/booking.service';
 })
 export class ConfirmComponent implements OnInit {
 
-  confirmed = false;
+  status: "unpaid" | "charged" | "confirmed" = "unpaid";
 
-  constructor(private bookingService: BookingService, private route: ActivatedRoute) { }
+  constructor(private userService: UserService, private bookingService: BookingService, private legacyService: LegacyService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.route.queryParamMap.subscribe(param => {
       let paymentToken = param.get("payment_token");
 
-      if (paymentToken) {
-        this.bookingService.placeBooking(paymentToken)?.subscribe(response => {
+      if (paymentToken && this.bookingService.chosenService && this.userService.authenticatedUser) {
+        this.legacyService.createTransaction({
+          amount: this.bookingService.chosenService?.Price,
+          payment_token: paymentToken,
+          customer_ref: this.userService.authenticatedUser.email,
+          payment_ref: this.bookingService.chosenService.Name
+        }).subscribe(response => {
           if (response.status == 200) {
-            this.confirmed = true;
+            this.status = "charged";
+
+            if (response.body?.payment_id) {
+              this.bookingService.placeBooking(response.body.payment_id)?.subscribe(response => {
+                if (response.status == 200) {
+                  this.status = "confirmed";
+                }
+              });
+            }
           }
-        }
-          
-        );
+        })
       }
     })
     

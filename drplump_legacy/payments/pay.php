@@ -11,7 +11,7 @@ $PAYMENT_PROCESSOR_SECRET = "supersecretconstant";
 if ($method == 'POST') {
     $data = json_decode(file_get_contents('php://input'), true);
     $amount=$data["amount"];
-    $payment_hash=$data["payment_hash"];
+    $payment_token=$data["payment_token"];
     $customer_ref = $data["customer_ref"];
     $payment_ref = $data["payment_ref"];
 
@@ -69,10 +69,34 @@ if ($method == 'POST') {
         $redeem_amount = ($value_redeemed !== null) ? min($value - $value_redeemed, $amount) : min($value, $amount);
     }
 
-    // Check that hash value matches
-    $expected_hash = sha1(($amount - $redeem_amount) . $PAYMENT_PROCESSOR_SECRET);
-    if ($expected_hash !== $payment_hash) {
-        echo json_encode( [ "error" => "Invalid payment hash. Payment rejected"] );
+    // Validate payment token with provider
+    $url = 'http://securepay.ru/api/process';
+    $data = ['token' => $payment_token, 'amount' => $amount ];
+
+    $ch = curl_init();
+
+    // Set cURL options
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    // Execute cURL session
+    $response = curl_exec($ch);
+
+    // Check for cURL errors
+    if ($response === false) {
+        die('Error occurred while fetching the data: ' 
+            . curl_error($ch));
+    }
+
+    // Close cURL session
+    curl_close($ch);
+
+    $jsn_response = json_decode($response, true);
+
+    if ($jsn_response["status"] == "failure") {
+        echo json_encode( [ "error" => "Payment token was invalid"] );
         http_response_code(400);
         $db->close();
         return;
@@ -81,7 +105,7 @@ if ($method == 'POST') {
     $payment_uuid = uniqid();
 
     $ret = $db->exec("INSERT INTO Payments (PaymentUUID, AmountPayable, PaymentHash, CardRedeemed, CardRedeemedAmount, CustomerReference, Reference)
-                      VALUES ('$payment_uuid', $amount, '$payment_hash', '$gift_card', $redeem_amount, '$customer_ref', '$payment_ref');");
+                      VALUES ('$payment_uuid', $amount, '', '$gift_card', $redeem_amount, '$customer_ref', '$payment_ref');");
     if(!$ret){
         echo json_encode( [ "error" => $db->lastErrorMsg() ] );
         http_response_code(500);

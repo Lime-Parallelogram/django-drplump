@@ -1,5 +1,6 @@
-<h1 *ngIf="!confirmed">There was a problem with your booking. Please try again, you have not been charged.</h1>
-<div class="confirmation" *ngIf="confirmed">
+<h1 *ngIf="status=='unpaid'">Please wait while we process your payment.</h1>
+<h1 *ngIf="status=='charged'">Your payment has been processed. Please wait here for a confirmation of your booking.</h1>
+<div class="confirmation" *ngIf="status=='confirmed'">
     <h1>Booking Confirmed.</h1>
     <p>Dr Plump looks forward to making you look fabulous!</p>
 </div>

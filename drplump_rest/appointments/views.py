@@ -15,13 +15,12 @@ class AppointmentDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = AppointmentSerializer
 
     def perform_update(self, serializer):
-        if (self.request.query_params.get("token")):
-            response = requests.post("http://mrpayment.limeparallelogram.uk/api/process", json={"token": self.request.query_params.get("token"), "amount": 10})
-            print(response.json())
-
-            if (response.status_code == 200):
+        if (self.request.query_params.get("payment_id")):
+            response = requests.post("http://drplump.scot/legacy/payments/validate.php", json={"payment_id": self.request.query_params.get("payment_id"), "amount": 10})
+            
+            if (response.status_code == 200 and response.json()["valid"]):
                 serializer.save()
             else:
-                raise APIException({"message": "Invalid payment token provided"}, code=status.HTTP_406_NOT_ACCEPTABLE)
+                raise APIException({"message": "Invalid payment id provided"}, code=status.HTTP_406_NOT_ACCEPTABLE)
         else:
-            raise APIException({"message": "No payment token provided"}, status=status.HTTP_402_PAYMENT_REQUIRED)
+            raise APIException({"message": "No payment id provided"}, code=status.HTTP_402_PAYMENT_REQUIRED)

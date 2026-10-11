@@ -1,7 +1,9 @@
 import { Component, TemplateRef } from '@angular/core';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { map } from 'rxjs';
 import { Appointment, AppointmentEnhanced, AppointmentsService } from 'src/app/services/appointments.service';
 import { Review, ReviewService } from 'src/app/services/review.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-treatments',
@@ -10,7 +12,7 @@ import { Review, ReviewService } from 'src/app/services/review.service';
 })
 export class TreatmentsComponent {
 
-  constructor (public appointmentsService: AppointmentsService, private reviewService: ReviewService, private modalService: NgbModal) { }
+  constructor (private userService: UserService, public appointmentsService: AppointmentsService, private reviewService: ReviewService, private modalService: NgbModal) { }
 
   myAppointments: AppointmentEnhanced[] | undefined;
 
@@ -27,7 +29,9 @@ export class TreatmentsComponent {
 
 
   ngOnInit() {
-    this.appointmentsService.getAppointments().subscribe(result => this.myAppointments = result)
+    this.appointmentsService.getAppointments().pipe(
+      map(resp => resp.filter(item => item.user_id == this.userService.authenticatedUser?.user_id))
+    ).subscribe(result => this.myAppointments = result)
   }
 
   open(content: TemplateRef<any>, appointmentID: number) {

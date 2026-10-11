@@ -7,17 +7,18 @@ import { UserService } from './user.service';
 
 export interface PaymentBreakdown {
   serviceTotal: number;
-  taxes: number;
   reductions: number;
   booking_fee: number;
 }
+
+const GIFT_CARD_SERVICE = -1;
 
 @Injectable({
   providedIn: 'root'
 })
 export class BookingService {
 
-  public chosenService?: Service = {
+  public chosenService: Service = {
     ID: 1,
     Name: "FILLERS",
     Price: 76,
@@ -25,16 +26,25 @@ export class BookingService {
     ImageURL: ""
   };
   public myAppointment?: Appointment;
+  public noAppointment: boolean = false;
 
   constructor(private appointmentService: AppointmentsService, private userService: UserService) { }
 
   public selectService(service: Service) {
     this.chosenService = service;
+    if (service.ID == GIFT_CARD_SERVICE) {
+      this.noAppointment = true;
+    }
   }
 
   public set appointment(appointment: Appointment | undefined) {
-    this.myAppointment = appointment;
-    localStorage.setItem("appointment", JSON.stringify(appointment))
+    if (this.chosenService?.ID == GIFT_CARD_SERVICE) {
+      alert("No appointment needed for a gift card");
+    } else {
+      this.myAppointment = appointment;
+      localStorage.setItem("appointment", JSON.stringify(appointment))
+    }
+    
   }
 
   public get appointment(): Appointment | undefined {
@@ -53,20 +63,27 @@ export class BookingService {
   public getPaymentBreakdown(): PaymentBreakdown {
     return {
       serviceTotal: this.chosenService?.Price,
-      taxes: Math.fround(this.chosenService?.Price * 20) / 100,
       reductions: 0,
       booking_fee: 5.00
     }
   }
 
   public getTotalPayable(breakdown: PaymentBreakdown) {
-    return Math.fround((breakdown.serviceTotal + breakdown.booking_fee + breakdown.reductions + breakdown.taxes) * 100) /100;
+    return breakdown.serviceTotal + breakdown.booking_fee + breakdown.reductions;
   }
 
-  public placeBooking(paymentToken: string): Observable<HttpResponse<Object>> | undefined {
+  public placeBooking(payment_id: string): Observable<HttpResponse<Object>> | undefined {
     if (this.appointment && this.userService.authenticatedUser) {
       this.appointment.user_id = this.userService.authenticatedUser.user_id;
-      return this.appointmentService.updateAppointment(this.appointment, paymentToken);
+      this.appointment.payment_ref = payment_id;
+      this.appointment.status = "CONFIRMED";
+      this.appointment.service_id = this.chosenService.ID;
+      return this.appointmentService.updateAppointment(this.appointment, payment_id);
+    }
+
+    // Special handling for buying Gift Cards
+    if (this.chosenService?.ID == GIFT_CARD_SERVICE) {
+
     }
 
     return undefined;

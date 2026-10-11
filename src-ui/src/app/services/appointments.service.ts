@@ -2,6 +2,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { DayPilot } from '@daypilot/daypilot-lite-angular';
 import { map, Observable } from 'rxjs';
+import { UserService } from './user.service';
 
 export interface AppointmentTime {
   start: string;
@@ -13,6 +14,7 @@ export interface Appointment {
   appointment_id: number;
   user_id?: number;
   service_id: number;
+  payment_ref?: string;
 
   start: string;
   end: string;
@@ -33,7 +35,7 @@ export interface AppointmentEnhanced extends Appointment {
 })
 export class AppointmentsService {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private userService: UserService, private httpClient: HttpClient) { }
 
   getAppointments(): Observable<AppointmentEnhanced[]> {
     return this.httpClient.get("/api/appointments").pipe(
@@ -41,7 +43,7 @@ export class AppointmentsService {
     )
   }
 
-  updateAppointment(newContent: Appointment, paymentToken: string): Observable<HttpResponse<Object>> {
-    return this.httpClient.put("/api/appointments/"+newContent.appointment_id, newContent, {observe: "response", params: {token: paymentToken}})
+  updateAppointment(newContent: Appointment, payment_id: string): Observable<HttpResponse<Object>> {
+    return this.httpClient.put("/api/appointments/"+newContent.appointment_id, newContent, {observe: "response", params: {payment_id: payment_id}})
   }
 }
