@@ -21,12 +21,12 @@ export class ConfirmComponent implements OnInit {
     this.route.queryParamMap.subscribe(param => {
       let paymentToken = param.get("payment_token");
 
-      if (paymentToken && this.bookingService.chosenService && this.userService.authenticatedUser) {
+      if (paymentToken && this.bookingService.service && this.userService.authenticatedUser) {
         this.legacyService.createTransaction({
-          amount: this.bookingService.chosenService?.Price,
+          amount: this.bookingService.service.Price,
           payment_token: paymentToken,
           customer_ref: this.userService.authenticatedUser.email,
-          payment_ref: this.bookingService.chosenService.Name
+          payment_ref: this.bookingService.service.Name
         }).subscribe(response => {
           if (response.status == 200) {
             this.status = "charged";

@@ -34,6 +34,7 @@ if ($method == 'POST') {
     if(!$ret){
         echo json_encode( [ "error" => $db->lastErrorMsg() ] );
         http_response_code(500);
+        return;
     }
 
     $final_payment = $ret["AmountPayable"] - $ret["CardRedeemedAmount"];
@@ -62,7 +63,6 @@ if ($method == 'POST') {
     // OBVIOUSLY it is stupid to use sudo here. Technically there is a genuine issue because
     // www-data can't create temporary files but this is SO VULNERABLE to command injection
     if (!file_exists($serve_filepath)) {
-        echo "needs to generate";
         exec("/bin/sudo pandoc --pdf-engine weasyprint -t pdf -f html --metadata title=\"$pdf_title\" -o $serve_filepath /tmp/html.html", $stdOutput);
     }
 

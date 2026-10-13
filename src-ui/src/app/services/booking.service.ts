@@ -19,7 +19,7 @@ const GIFT_CARD_SERVICE = -1;
 export class BookingService {
 
   public chosenService: Service = {
-    ID: 1,
+    ID: -99,
     Name: "FILLERS",
     Price: 76,
     Description: "TEST",
@@ -35,6 +35,7 @@ export class BookingService {
     if (service.ID == GIFT_CARD_SERVICE) {
       this.noAppointment = true;
     }
+    localStorage.setItem("service", JSON.stringify(service))
   }
 
   public set appointment(appointment: Appointment | undefined) {
@@ -56,6 +57,17 @@ export class BookingService {
     }
 
     return this.myAppointment
+  }
+
+  public get service(): Service {
+    if (this.chosenService.ID == -99) {
+      let from_storage = localStorage.getItem("service")
+      if (from_storage) {
+        this.chosenService = JSON.parse(from_storage);
+      }
+    }
+
+    return this.chosenService
   }
 
   // ─── Payment Related ─────────────────────────────────────────────────

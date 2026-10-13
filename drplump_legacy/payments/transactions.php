@@ -6,6 +6,9 @@ header("Content-Type:application/json");
 
 $method = $_SERVER['REQUEST_METHOD'];
 
+include "../mydb.php";
+include "../validators.php";
+
 if ($method == 'POST') {
     $data = json_decode(file_get_contents('php://input'), true);
     $customer_ref=$data["customer_ref"];

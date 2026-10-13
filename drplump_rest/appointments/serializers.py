@@ -7,6 +7,7 @@ class AppointmentSerializer(serializers.ModelSerializer):
         fields = [
             "status",
             "appointment_id",
+            "service_id",
             "user_id",
             "payment_ref",
             "start",

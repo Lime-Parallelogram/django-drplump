@@ -2,8 +2,13 @@ import { Component, TemplateRef } from '@angular/core';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { map } from 'rxjs';
 import { Appointment, AppointmentEnhanced, AppointmentsService } from 'src/app/services/appointments.service';
+import { LegacyService, LegacyTransaction } from 'src/app/services/legacy.service';
 import { Review, ReviewService } from 'src/app/services/review.service';
 import { UserService } from 'src/app/services/user.service';
+
+interface AppointmentExtended extends AppointmentEnhanced {
+  amount: number | undefined;
+}
 
 @Component({
   selector: 'app-treatments',
@@ -12,9 +17,9 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class TreatmentsComponent {
 
-  constructor (private userService: UserService, public appointmentsService: AppointmentsService, private reviewService: ReviewService, private modalService: NgbModal) { }
+  constructor (private legacyService: LegacyService, private userService: UserService, public appointmentsService: AppointmentsService, private reviewService: ReviewService, private modalService: NgbModal) { }
 
-  myAppointments: AppointmentEnhanced[] | undefined;
+  myAppointments: AppointmentExtended[] | undefined;
 
   // Form components for review
   defaultReview: Review = {
@@ -31,7 +36,34 @@ export class TreatmentsComponent {
   ngOnInit() {
     this.appointmentsService.getAppointments().pipe(
       map(resp => resp.filter(item => item.user_id == this.userService.authenticatedUser?.user_id))
-    ).subscribe(result => this.myAppointments = result)
+    ).subscribe(result => {
+      if (this.userService.authenticatedUser?.email) {
+        this.legacyService.getTransactions(this.userService.authenticatedUser?.email).subscribe(
+          response2 => {
+            this.myAppointments = result.map(item => {
+            return {
+              ...item,
+              amount: response2.body?.results.find(value => value.PaymentUUID == item.payment_ref)?.AmountPayable
+            }});
+          }
+        )
+      }
+      
+      
+    })
+  }
+
+  downloadReceipt(payment_id: string|undefined) {
+    if (this.userService.authenticatedUser?.name && payment_id) {
+      this.legacyService.getReceiptDownloadLink(this.userService.authenticatedUser?.name, payment_id).subscribe(
+        response => {
+          if (response.body?.result_url) {
+            window.open(response.body.result_url, '_blank')?.focus();
+          }
+        }
+      )
+    }
+    
   }
 
   open(content: TemplateRef<any>, appointmentID: number) {

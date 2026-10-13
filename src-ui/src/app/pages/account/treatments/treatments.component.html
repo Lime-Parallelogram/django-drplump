@@ -14,13 +14,12 @@
             <td>{{ appointment.status }}</td>
             <td>{{ appointment.service_name }}</td>
             <td>{{ appointment.start }}</td>
-            <td>£99</td>
+            <td>£{{ appointment.amount }}</td>
 
             <!-- Actions -->
             <td>
-                <button>Cancel Booking</button>
                 <button (click)="open(reviewModal, appointment.appointment_id)" [disabled]="appointment.is_reviewed">Leave Review</button>
-                <button>Download Receipt</button>
+                <button (click)="downloadReceipt(appointment.payment_ref)">Download Receipt</button>
             </td>
         </tr>
     </table>
