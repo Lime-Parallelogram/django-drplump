@@ -26,7 +26,7 @@ class UserPhotoUpload(APIView):
         
         file_name = request.FILES["file"].name
 
-        with open(f"../src-ui/src/assets/img/profile/{file_name}", 'wb') as f:
+        with open(f"/var/www/html/assets/img/profile/{file_name}", 'wb') as f:
             f.write(request.FILES["file"].read())
         
         return Response({"message": "file successfully uploaded", "url": f"/assets/img/profile/{file_name}"}, status=status.HTTP_200_OK)

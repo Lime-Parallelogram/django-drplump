@@ -37,7 +37,7 @@ export class PaymentComponent implements OnInit {
     }
   }
   payByCardClick() {
-    window.open(`http://securepay.ru?returnUrl=http://localhost:4200/book/paymentCallback&merchantName=Dr%20Plump%20LTD.%20Edinburgh&paymentAmount=${this.bookingService.getTotalPayable(this.currentCost)}`, "Payment Processor", "width=600,height=800")
+    window.open(`http://securepay.ru?returnUrl=http://drplump.scot/book/paymentCallback&merchantName=Dr%20Plump%20LTD.%20Edinburgh&paymentAmount=${this.bookingService.getTotalPayable(this.currentCost)}`, "Payment Processor", "width=600,height=800")
   }
 
 }
